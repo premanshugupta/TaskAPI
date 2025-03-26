@@ -9,14 +9,14 @@ const ProductGrid = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // Fetch products from the Fake Store API
+   
     const fetchProducts = async (search = '') => {
         try {
             setLoading(true);
             setError(null);
             const response = await axios.get('https://fakestoreapi.com/products');
             
-            // Filter products based on search term
+           
             const filteredProducts = response.data.filter(product => 
                 product.title.toLowerCase().includes(search.toLowerCase()) ||
                 product.description.toLowerCase().includes(search.toLowerCase())
@@ -31,7 +31,7 @@ const ProductGrid = () => {
         }
     };
 
-    // Debounced search function
+   
     const debouncedSearch = useCallback(
         debounce((searchTerm) => {
             fetchProducts(searchTerm);
@@ -39,14 +39,14 @@ const ProductGrid = () => {
         []
     );
 
-    // Handle search input change
+   
     const handleSearchChange = (e) => {
         const value = e.target.value;
         setSearchTerm(value);
         debouncedSearch(value);
     };
 
-    // Initial fetch
+  
     useEffect(() => {
         fetchProducts();
     }, []);
